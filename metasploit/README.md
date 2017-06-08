@@ -59,3 +59,16 @@ If you see a `Failed to connect to the database`, don't worry too much about it.
 If you need to run a command with elevated privileges, sudo has been installed and the `msf` user has all the rights that `root` has.
 
 The default password for `msf` is `toor`, which is in the Dockerfile if you want to change it.
+
+## Docker Compose
+If you want to go crazy and run your database in a separate container you can use Docker Compose like so:
+
+```
+docker-compose run console /bin/bash
+```
+
+When you're done in the console just make sure you remember to shutdown the db container cleanly with:
+
+```
+docker-compose stop db
+```
