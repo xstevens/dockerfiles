@@ -1,0 +1,20 @@
+version: '3'
+services:
+  console:
+    build: .
+    links:
+      - "db"
+    volumes:
+      - ./msf4:/home/msf/.msf4
+      - ./tmp:/tmp/data
+    command: /bin/bash
+  db:
+    image: postgres
+    environment:
+      POSTGRES_USER: "msf"
+      POSTGRES_PASSWORD: "secret"
+      POSTGRES_DB: "msf"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+volumes:
+  pgdata:
