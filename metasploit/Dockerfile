@@ -4,7 +4,7 @@ MAINTAINER Xavier Stevens <xavier.stevens@gmail.com>
 USER root
 
 # Base packages
-RUN apt-get update && apt-get -y install curl git nmap postgresql sudo
+RUN apt-get update && apt-get -y install curl git nmap postgresql sudo tmux
 
 WORKDIR /tmp
 

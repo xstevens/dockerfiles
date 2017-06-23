@@ -72,3 +72,7 @@ When you're done in the console just make sure you remember to shutdown the db c
 ```
 docker-compose stop db
 ```
+
+# Screenshot
+Using tmux to use msfconsole/findsploit at same time:
+![screenshot](metasploit-screenshot.png)
