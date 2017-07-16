@@ -31,4 +31,5 @@ VOLUME /home/recon/.recon-ng/
 USER recon
 
 # just a suggestion, use /bin/bash if you want to drop into bash or tmux
+WORKDIR /home/recon/recon-ng
 CMD ["/home/recon/recon-ng/recon-ng"]
