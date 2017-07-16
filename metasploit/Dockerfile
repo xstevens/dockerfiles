@@ -1,10 +1,15 @@
 FROM ubuntu:16.04
 MAINTAINER Xavier Stevens <xavier.stevens@gmail.com>
 
-USER root
-
 # Base packages
-RUN apt-get update && apt-get -y install curl git nmap postgresql sudo tmux
+RUN apt-get update && apt-get install -y \
+    curl \
+    git \
+    sudo \
+    tmux \
+    nmap \
+    postgresql \
+&& rm -rf /var/lib/apt/lists/*
 
 WORKDIR /tmp
 
@@ -36,3 +41,6 @@ WORKDIR /home/msf
 # settings and custom scripts folder
 VOLUME /home/msf/.msf4/
 VOLUME /tmp/data/
+
+# just a suggestion, use /bin/bash if you want to drop into bash or tmux
+CMD ["/usr/bin/msfconsole"]
