@@ -27,7 +27,8 @@ RUN curl -L -O https://github.com/BurntSushi/ripgrep/releases/download/0.5.2/rip
     cp /tmp/ripgrep-0.5.2-x86_64-unknown-linux-musl/rg /usr/local/bin/
 
 # Add findsploit script
-ADD findsploit.sh /usr/local/bin/findsploit
+COPY findsploit.sh /usr/local/bin/findsploit
+RUN chmod 755 /usr/local/bin/findsploit
 
 # create msf user
 RUN /usr/sbin/useradd msf
