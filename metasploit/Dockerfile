@@ -1,10 +1,12 @@
-FROM ubuntu:16.04
+FROM debian:stable
 MAINTAINER Xavier Stevens <xavier.stevens@gmail.com>
 
 # Base packages
 RUN apt-get update && apt-get install -y \
+    apt-utils \
     curl \
     git \
+    gnupg \
     sudo \
     tmux \
     nmap \

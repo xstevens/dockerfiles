@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM debian:stable
 MAINTAINER Xavier Stevens <xavier.stevens@gmail.com>
 
 # Base packages
@@ -21,6 +21,13 @@ WORKDIR /home/recon
 # Install recon-ng
 RUN git clone https://github.com/xstevens/recon-ng.git
 RUN cd recon-ng && pip install -r requirements.txt
+
+# Install Sublist3r (this also is available as a module in my fork of recon-ng)
+RUN git clone https://github.com/aboul3la/Sublist3r.git
+RUN cd Sublist3r && pip install -r requirements.txt
+
+# Install theHarvester
+RUN git clone https://github.com/laramies/theHarvester.git
 
 # recon-ng data volume
 RUN mkdir /home/recon/.recon-ng
