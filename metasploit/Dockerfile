@@ -1,17 +1,18 @@
-FROM debian:stable
+FROM debian:latest
 MAINTAINER Xavier Stevens <xavier.stevens@gmail.com>
 
 # Base packages
-RUN apt-get update && apt-get install -y \
-    apt-utils \
-    curl \
-    git \
-    gnupg \
-    sudo \
-    tmux \
-    nmap \
-    postgresql \
-&& rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y --no-install-recommends\
+        apt-utils \
+        ca-certificates \
+        curl \
+        git \
+        gnupg \
+        nmap \
+        postgresql \
+        sudo \
+        tmux \
+    && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /tmp
 

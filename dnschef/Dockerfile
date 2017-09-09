@@ -1,14 +1,17 @@
-FROM debian:stable
+FROM debian:latest
 MAINTAINER Xavier Stevens <xavier.stevens@gmail.com>
 
 # Base packages
-RUN apt-get update && apt-get install -y \
-    git \
-    sudo \
-    tmux \
-    python \
-    python-pip \
-&& rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y --no-install-recommends\
+        ca-certificates \
+        git \
+        python \
+        python-pip \
+        python-setuptools \
+        python-wheel \
+        sudo \
+        tmux \
+    && rm -rf /var/lib/apt/lists/*
 
 # Install dnschef
 RUN git clone https://github.com/iphelix/dnschef.git /opt/dnschef
