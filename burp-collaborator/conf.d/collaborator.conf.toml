@@ -1,0 +1,11 @@
+[template]
+src   = "collaborator.conf"
+dest  = "/burp/collaborator.conf"
+owner = "burp"
+group = "burp"
+mode  = "0644"
+keys = [
+    "/burp/server/domain",
+    "/burp/ssl/domain",
+    "/burp/metrics/path",
+]
