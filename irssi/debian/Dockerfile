@@ -1,7 +1,8 @@
-FROM debian:latest
+FROM debian:stretch-slim
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
 		ca-certificates \
+		gnupg \
 		libdatetime-perl \
 		libglib2.0-0 \
 		libwww-perl \
@@ -16,13 +17,14 @@ RUN useradd --create-home --home-dir $HOME user \
 	&& chown -R user:user $HOME
 
 ENV LANG C.UTF-8
-
-ENV IRSSI_VERSION 1.0.4
+ENV LC_ALL C.UTF-8
+ENV IRSSI_VERSION 1.0.5
 
 RUN buildDeps=' \
 		autoconf \
 		automake \
 		bzip2 \
+		dirmngr \
 		dpkg-dev \
 		libglib2.0-dev \
 		libncurses-dev \
@@ -32,8 +34,7 @@ RUN buildDeps=' \
 		lynx \
 		make \
 		pkg-config \
-		xz-utils \
-	' \
+		xz-utils' \
 	&& set -x \
 	&& apt-get update && apt-get install -y $buildDeps --no-install-recommends \
 	&& rm -rf /var/lib/apt/lists/* \

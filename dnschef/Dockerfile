@@ -1,25 +1,26 @@
-FROM debian:latest
-MAINTAINER Xavier Stevens <xavier.stevens@gmail.com>
+FROM python:2.7-slim-stretch
+LABEL maintainer="Xavier Stevens <xavier.stevens@gmail.com>"
 
-# Base packages
+# base packages
 RUN apt-get update && apt-get install -y --no-install-recommends\
-        ca-certificates \
-        git \
-        python \
-        python-pip \
-        python-setuptools \
-        python-wheel \
-        sudo \
-        tmux \
-    && rm -rf /var/lib/apt/lists/*
+    ca-certificates \
+    git \
+&& rm -rf /var/lib/apt/lists/*
 
-# Install dnschef
-RUN git clone https://github.com/iphelix/dnschef.git /opt/dnschef
-WORKDIR /opt/dnschef
-RUN pip install dnslib IPy
+ENV LANG C.UTF-8
+ENV LC_ALL C.UTF-8
 
-# Expose DNS port
-EXPOSE 53
+# add dnschef user
+RUN useradd dnschef
 
-ENTRYPOINT ["/opt/dnschef/dnschef.py", "-p", "53"]
+# install dnschef
+RUN git clone https://github.com/iphelix/dnschef.git /dnschef \
+    && pip install dnslib IPy \
+    && chown -R dnschef /dnschef
+
+WORKDIR /dnschef
+EXPOSE 5353
+USER dnschef
+
+ENTRYPOINT ["/dnschef/dnschef.py", "-p", "5353"]
 CMD ["--fakedomains=*.evilcorp.com", "--fakeip=127.0.0.1"]

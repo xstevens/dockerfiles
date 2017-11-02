@@ -7,13 +7,16 @@ RUN apt-get update && apt-get install -y --no-install-recommends\
     wget \
 && rm -rf /var/lib/apt/lists/*
 
+ENV LANG C.UTF-8
+ENV LC_ALL C.UTF-8
+
 # setup confd
 RUN wget -O /bin/confd https://github.com/kelseyhightower/confd/releases/download/v0.14.0/confd-0.14.0-linux-amd64 && \
     chmod +x /bin/confd && \
     mkdir -p /etc/confd/{conf.d, templates}
 
 # add burp user
-RUN /usr/sbin/useradd burp
+RUN useradd burp
 
 # setup a Burp Suite directory
 RUN mkdir -p /burp
