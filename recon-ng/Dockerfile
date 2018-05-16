@@ -2,11 +2,12 @@ FROM python:2.7-slim-stretch
 LABEL maintainer="Xavier Stevens <xavier.stevens@gmail.com>"
 
 # base packages
-RUN apt-get update && apt-get install -y --no-install-recommends\
-    ca-certificates \
-    git \
-    tmux \
-&& rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get upgrade -y && \
+    apt-get install -y --no-install-recommends \
+        ca-certificates \
+        git \
+        tmux \
+    && rm -rf /var/lib/apt/lists/*
 
 ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8

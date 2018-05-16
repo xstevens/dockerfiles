@@ -1,6 +1,7 @@
 FROM debian:stretch-slim
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN apt-get update && apt-get upgrade -y && \
+	apt-get install -y --no-install-recommends \
 		ca-certificates \
 		gnupg \
 		libdatetime-perl \

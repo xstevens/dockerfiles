@@ -1,9 +1,10 @@
 FROM node:8-slim
 
-RUN apt-get update && apt-get install -y --no-install-recommends\
-    ca-certificates \
-    chromium \
-&& rm -rf /var/lib/apt-lists/*
+RUN apt-get update && apt-get upgrade -y && \
+    apt-get install -y --no-install-recommends \
+        ca-certificates \
+        chromium \
+    && rm -rf /var/lib/apt-lists/*
 
 COPY js /zbrowse/js
 COPY zbrowse.sh /zbrowse

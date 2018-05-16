@@ -2,16 +2,17 @@ FROM openjdk:8-slim
 LABEL maintainer="Xavier Stevens <xavier.stevens@gmail.com>"
 
 # Base packages
-RUN apt-get update && apt-get install -y --no-install-recommends\
-    ca-certificates \
-    wget \
-&& rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get upgrade -y && \
+    apt-get install -y --no-install-recommends\
+        ca-certificates \
+        wget \
+    && rm -rf /var/lib/apt/lists/*
 
 ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8
 
 # setup confd
-RUN wget -O /bin/confd https://github.com/kelseyhightower/confd/releases/download/v0.14.0/confd-0.14.0-linux-amd64 && \
+RUN wget -O /bin/confd https://github.com/kelseyhightower/confd/releases/download/v0.15.0/confd-0.15.0-linux-amd64 && \
     chmod +x /bin/confd && \
     mkdir -p /etc/confd/{conf.d, templates}
 

@@ -2,8 +2,9 @@ FROM debian:stretch-slim
 LABEL maintainer="Xavier Stevens <xavier.stevens@gmail.com>"
 
 # Base packages
-RUN mkdir -p /usr/share/man/man1 && mkdir -p /usr/share/man/man7 \
-    && apt-get update && apt-get install -y --no-install-recommends\
+RUN mkdir -p /usr/share/man/man1 && mkdir -p /usr/share/man/man7 && \
+    apt-get update && apt-get upgrade -y && \
+    apt-get install -y --no-install-recommends \
         apt-utils \
         ca-certificates \
         curl \
@@ -26,9 +27,8 @@ RUN git clone https://github.com/offensive-security/exploit-database.git /opt/ex
     ln -sf /opt/exploit-database/searchsploit /usr/local/bin/searchsploit
 
 # Install ripgrep
-RUN curl -L -O https://github.com/BurntSushi/ripgrep/releases/download/0.7.1/ripgrep-0.7.1-x86_64-unknown-linux-musl.tar.gz && \
-    tar xvzf ripgrep-0.7.1-x86_64-unknown-linux-musl.tar.gz && \
-    cp /tmp/ripgrep-0.7.1-x86_64-unknown-linux-musl/rg /usr/local/bin/
+RUN curl -LO https://github.com/BurntSushi/ripgrep/releases/download/0.8.1/ripgrep_0.8.1_amd64.deb && \
+    dpkg -i ripgrep_0.8.1_amd64.deb
 
 # Add findsploit script
 COPY findsploit.sh /usr/local/bin/findsploit
