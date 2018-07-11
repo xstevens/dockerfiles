@@ -6,4 +6,4 @@ if [ -f requirements.txt ]; then
 fi
 
 # drop into a bash shell
-/bin/sh
+/bin/bash
