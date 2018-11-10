@@ -8,7 +8,7 @@ const puppeteer = require('puppeteer');
   });
   const page = await browser.newPage();
   await page.setViewport({width: 1280, height: 1440});
-  let url = 'https://google.com';
+  let url = process.env.TARGET_URL;
   try {
     await page.goto(url, {timeout: 30000});
     await page.screenshot({path: '/screenshots/screenshot.png'});
