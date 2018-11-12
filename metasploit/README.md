@@ -55,11 +55,6 @@ msf >
 
 If you see a `Failed to connect to the database`, don't worry too much about it. You're probably connected by the time console loads. You can verify with `db_status` in the console.
 
-## Administration
-If you need to run a command with elevated privileges, sudo has been installed and the `msf` user has all the rights that `root` has.
-
-The default password for `msf` is `toor`, which is in the Dockerfile if you want to change it.
-
 ## Docker Compose
 If you want to go crazy and run your database in a separate container you can use Docker Compose like so:
 

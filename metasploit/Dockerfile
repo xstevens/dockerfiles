@@ -1,9 +1,9 @@
-FROM debian:stretch-slim
+FROM debian:buster-slim
 LABEL maintainer="Xavier Stevens <xavier.stevens@gmail.com>"
 
 # Base packages
 RUN mkdir -p /usr/share/man/man1 && mkdir -p /usr/share/man/man7 && \
-    apt-get update && apt-get upgrade -y && \
+    apt-get update && \
     apt-get install -y --no-install-recommends \
         apt-utils \
         ca-certificates \
@@ -12,7 +12,6 @@ RUN mkdir -p /usr/share/man/man1 && mkdir -p /usr/share/man/man7 && \
         gnupg \
         nmap \
         postgresql \
-        sudo \
         tmux \
     && rm -rf /var/lib/apt/lists/*
 
@@ -27,18 +26,15 @@ RUN git clone https://github.com/offensive-security/exploit-database.git /opt/ex
     ln -sf /opt/exploit-database/searchsploit /usr/local/bin/searchsploit
 
 # Install ripgrep
-RUN curl -LO https://github.com/BurntSushi/ripgrep/releases/download/0.8.1/ripgrep_0.8.1_amd64.deb && \
-    dpkg -i ripgrep_0.8.1_amd64.deb
+RUN curl -LO https://github.com/BurntSushi/ripgrep/releases/download/0.10.0/ripgrep_0.10.0_amd64.deb && \
+    dpkg -i ripgrep_0.10.0_amd64.deb
 
 # Add findsploit script
 COPY findsploit.sh /usr/local/bin/findsploit
 RUN chmod 755 /usr/local/bin/findsploit
 
 # create msf user
-ENV MSF_PASSWORD toor
 RUN /usr/sbin/useradd msf
-RUN /usr/sbin/usermod -aG sudo msf
-RUN echo "msf:$MSF_PASSWORD" | chpasswd
 
 # switch to msf user
 USER msf
