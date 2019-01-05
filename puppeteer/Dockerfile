@@ -1,13 +1,15 @@
-FROM node:10.13-alpine
+FROM node:10.15-alpine
+LABEL maintainer="Xavier Stevens <xavier.stevens@gmail.com>"
 
 # Installs latest Chromium (68) package.
 RUN apk update && apk upgrade && \
-    apk add --no-cache chromium
+    apk add --no-cache chromium && \
     # echo @edge http://nl.alpinelinux.org/alpine/edge/community >> /etc/apk/repositories && \
     # echo @edge http://nl.alpinelinux.org/alpine/edge/main >> /etc/apk/repositories && \
     # apk add --no-cache \
     #   chromium@edge \
     #   nss@edge
+    rm -rf /var/cache/apk/*
 
 # Tell Puppeteer to skip installing Chrome. We'll be using the installed package.
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
@@ -16,13 +18,14 @@ ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
 RUN yarn add puppeteer@1.4.0
 
 # Add user so we don't need --no-sandbox.
-RUN addgroup -S pptruser && adduser -S -g pptruser pptruser \
-    && mkdir -p /home/pptruser/Downloads \
-    && chown -R pptruser:pptruser /home/pptruser
+#RUN addgroup -S puppeteer && adduser -S -g puppeteer puppeteer \
+RUN adduser -s /bin/sh -D puppeteer && \
+    mkdir -p /home/puppeteer/Downloads && \
+    chown -R puppeteer:puppeteer /home/puppeteer
 
 VOLUME /screenshots
 
 # Run everything after as non-privileged user.
-USER pptruser
+USER puppeteer
 
 CMD ["/bin/sh"]
