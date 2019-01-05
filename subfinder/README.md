@@ -8,7 +8,7 @@ docker build -t $USER/subfinder .
 
 ## Run
 ```
-$ docker run -it -v $HOME/.config/subfinder:/home/subfinder/.config/subfinder xstevens/subfinder -h
+$ docker run -it -v $HOME/.config/subfinder:/home/subfinder/.config/subfinder $USER/subfinder -h
 Usage of /usr/bin/subfinder:
   -b	Use bruteforcing to find subdomains
   -d string

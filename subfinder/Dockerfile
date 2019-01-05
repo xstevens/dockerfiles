@@ -19,6 +19,8 @@ FROM alpine:3.8
 COPY --from=build /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
 COPY --from=build /go/src/app/subfinder /usr/bin/subfinder
 
+VOLUME /output
+
 RUN adduser -s /bin/sh -D subfinder
 USER subfinder
 

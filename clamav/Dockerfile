@@ -5,7 +5,6 @@ RUN apt-get update && apt-get upgrade -y && \
 	apt-get install -y --no-install-recommends \
 		ca-certificates \
 		clamav \
-		gnupg \
 	&& rm -rf /var/lib/apt/lists/*
 
 ENV LANG C.UTF-8

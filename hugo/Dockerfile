@@ -1,4 +1,5 @@
-FROM node:10.15
+FROM node:10.15-stretch-slim
+LABEL maintainer="Xavier Stevens <xavier.stevens@gmail.com>"
 
 RUN apt-get update && apt-get upgrade -y && \
 	apt-get install -y --no-install-recommends \
@@ -9,12 +10,15 @@ RUN apt-get update && apt-get upgrade -y && \
 
 ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8
+ENV HUGO_VERSION 0.53
 
 WORKDIR /opt/hugo    
-RUN curl -LO https://github.com/gohugoio/hugo/releases/download/v0.53/hugo_extended_0.53_Linux-64bit.tar.gz && \
-    curl -LO https://github.com/gohugoio/hugo/releases/download/v0.53/hugo_extended_0.53_checksums.txt && \
-    grep 'hugo_extended_0.53_Linux-64bit.tar.gz' hugo_extended_0.53_checksums.txt | sha256sum --status -c && \
-    tar xvzf hugo_extended_0.53_Linux-64bit.tar.gz
+RUN set -x && \
+	curl -LO "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_Linux-64bit.tar.gz" && \
+    curl -LO "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_checksums.txt" && \
+    grep "hugo_extended_${HUGO_VERSION}_Linux-64bit.tar.gz" "hugo_extended_${HUGO_VERSION}_checksums.txt" | sha256sum --status -c && \
+    tar xvzf "hugo_extended_${HUGO_VERSION}_Linux-64bit.tar.gz" && \
+	rm "hugo_extended_${HUGO_VERSION}_checksums.txt" "hugo_extended_${HUGO_VERSION}_Linux-64bit.tar.gz"
 ENV PATH "/opt/hugo:${PATH}"
 
 RUN npm install -g postcss-cli autoprefixer
