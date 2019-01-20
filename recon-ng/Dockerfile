@@ -1,6 +1,9 @@
 FROM python:2.7-slim-stretch
 LABEL maintainer="Xavier Stevens <xavier.stevens@gmail.com>"
 
+# set DEBIAN_FRONTEND to convey no-TTY during build
+ARG DEBIAN_FRONTEND=noninteractive
+
 # base packages
 RUN apt-get update && apt-get upgrade -y && \
     apt-get install -y --no-install-recommends \
@@ -13,28 +16,24 @@ ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8
 
 # create recon user
-RUN /usr/sbin/useradd recon
+RUN useradd user
 
-WORKDIR /home/recon
+WORKDIR /home/user
 
 # install recon-ng
-RUN git clone https://github.com/xstevens/recon-ng.git
-RUN cd recon-ng && pip install -r requirements.txt
-
-# install Sublist3r (this also is available as a module in my fork of recon-ng)
-RUN git clone https://github.com/aboul3la/Sublist3r.git
-RUN cd Sublist3r && pip install -r requirements.txt
+RUN git clone https://github.com/xstevens/recon-ng.git /recon-ng
+RUN cd /recon-ng && pip install -r requirements.txt
 
 # install theHarvester
-RUN git clone https://github.com/laramies/theHarvester.git
+RUN git clone https://github.com/laramies/theHarvester.git /harvester
 
 # recon-ng data volume
-RUN mkdir /home/recon/.recon-ng
-RUN chown -R recon:recon /home/recon
-VOLUME /home/recon/.recon-ng/
+RUN mkdir /home/user/.recon-ng && \
+    chown -R user:user /home/user
+VOLUME /home/user/.recon-ng/
 
 # switch to recon user
-USER recon
+USER user
 
 # just a suggestion, use /bin/bash if you want to drop into bash or tmux
-CMD ["/home/recon/recon-ng/recon-ng"]
+CMD ["/recon-ng/recon-ng"]

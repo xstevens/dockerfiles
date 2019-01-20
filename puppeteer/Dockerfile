@@ -17,8 +17,6 @@ ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
 # Puppeteer v1.4.0 works with Chromium 68.
 RUN yarn add puppeteer@1.4.0
 
-# Add user so we don't need --no-sandbox.
-#RUN addgroup -S puppeteer && adduser -S -g puppeteer puppeteer \
 RUN adduser -s /bin/sh -D puppeteer && \
     mkdir -p /home/puppeteer/Downloads && \
     chown -R puppeteer:puppeteer /home/puppeteer

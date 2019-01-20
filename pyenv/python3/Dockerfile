@@ -1,5 +1,8 @@
-FROM python:3.6-slim-stretch
+FROM python:3.7-slim-stretch
 LABEL maintainer="Xavier Stevens <xavier.stevens@gmail.com>"
+
+# set DEBIAN_FRONTEND to convey no-TTY during build
+ARG DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates \
@@ -17,7 +20,10 @@ RUN pip install --upgrade pip && pip install virtualenv pip-tools
 ADD run.sh /app/run.sh
 RUN chmod +x /app/run.sh
 
-RUN mkdir /src
+# add user
+RUN useradd user
+
+RUN mkdir /src && chown user /src
 VOLUME /src
 WORKDIR /src
 

@@ -55,6 +55,12 @@ msf >
 
 If you see a `Failed to connect to the database`, don't worry too much about it. You're probably connected by the time console loads. You can verify with `db_status` in the console.
 
+Another nice option is running in a `tmux` session like so:
+
+```
+$ docker run -it -v $PWD/msf4:/home/msf/.msf4 -v $PWD/tmp:/tmp/data $USER/metasploit /bin/bash -c 'tmux new-session msfconsole'
+```
+
 ## Docker Compose
 If you want to go crazy and run your database in a separate container you can use Docker Compose like so:
 

@@ -21,7 +21,7 @@ COPY --from=build /go/src/app/subfinder /usr/bin/subfinder
 
 VOLUME /output
 
-RUN adduser -s /bin/sh -D subfinder
-USER subfinder
+RUN adduser -s /bin/sh -D user
+USER user
 
 ENTRYPOINT ["/usr/bin/subfinder"]

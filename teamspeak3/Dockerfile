@@ -1,5 +1,8 @@
-FROM debian:stretch-slim
+FROM debian:buster-slim
 LABEL maintainer="Xavier Stevens <xavier.stevens@gmail.com>"
+
+# set DEBIAN_FRONTEND to convey no-TTY during build
+ARG DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get install -y --no-install-recommends\
         ca-certificates \
@@ -9,21 +12,20 @@ RUN apt-get update && apt-get install -y --no-install-recommends\
 
 ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8
+ENV TEAMSPEAK_VERSION 3.5.1
 
-RUN curl -O http://dl.4players.de/ts/releases/3.0.13.8/teamspeak3-server_linux_amd64-3.0.13.8.tar.bz2
+RUN curl -O "https://files.teamspeak-services.com/releases/server/${TEAMSPEAK_VERSION}/teamspeak3-server_linux_amd64-${TEAMSPEAK_VERSION}.tar.bz2"
 
-RUN mkdir -p /teamspeak
-RUN tar xvjf teamspeak3-server_linux_amd64-3.0.13.8.tar.bz2 -C /teamspeak --strip-components=1
+RUN mkdir -p /teamspeak && \
+    tar xvjf "teamspeak3-server_linux_amd64-${TEAMSPEAK_VERSION}.tar.bz2" -C /teamspeak --strip-components=1
 
-# add teamspeak user
-RUN /usr/sbin/useradd teamspeak
-
-# chown teamspeak directory
-RUN chown -R teamspeak /teamspeak
+# add user
+RUN useradd user && \
+    chown -R user /teamspeak
 
 WORKDIR /teamspeak
 ENV LD_LIBRARY_PATH /teamspeak:${LD_LIBRARY_PATH}
 EXPOSE 9987
-USER teamspeak
+USER user
 
 ENTRYPOINT ["/teamspeak/ts3server"]

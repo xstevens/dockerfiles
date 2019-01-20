@@ -1,5 +1,8 @@
-FROM debian:sid-slim
+FROM debian:buster-slim
 LABEL maintainer="Xavier Stevens <xavier.stevens@gmail.com>"
+
+# set DEBIAN_FRONTEND to convey no-TTY during build
+ARG DEBIAN_FRONTEND=noninteractive
 
 ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8

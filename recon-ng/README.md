@@ -42,8 +42,3 @@ _/    _/  _/_/_/_/    _/_/_/    _/_/_/    _/      _/            _/      _/    _/
 
 [recon-ng][default] >
 ```
-
-## Administration
-If you need to run a command with elevated privileges, sudo has been installed and the `recon` user has all the rights that `root` has.
-
-The default password for `recon` is `toor`, which is in the Dockerfile if you want to change it.

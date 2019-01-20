@@ -1,6 +1,9 @@
 FROM debian:buster-slim
 LABEL maintainer="Xavier Stevens <xavier.stevens@gmail.com>"
 
+# set DEBIAN_FRONTEND to convey no-TTY during build
+ARG DEBIAN_FRONTEND=noninteractive
+
 # Base packages
 RUN mkdir -p /usr/share/man/man1 && mkdir -p /usr/share/man/man7 && \
     apt-get update && \
@@ -30,11 +33,11 @@ RUN curl -LO https://github.com/BurntSushi/ripgrep/releases/download/0.10.0/ripg
     dpkg -i ripgrep_0.10.0_amd64.deb
 
 # Add findsploit script
-COPY findsploit.sh /usr/local/bin/findsploit
-RUN chmod 755 /usr/local/bin/findsploit
+COPY findsploit.sh /usr/bin/findsploit
+RUN chmod 755 /usr/bin/findsploit
 
 # create msf user
-RUN /usr/sbin/useradd msf
+RUN useradd msf
 
 # switch to msf user
 USER msf

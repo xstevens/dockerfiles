@@ -1,6 +1,9 @@
 FROM openjdk:8-slim
 LABEL maintainer="Xavier Stevens <xavier.stevens@gmail.com>"
 
+# set DEBIAN_FRONTEND to convey no-TTY during build
+ARG DEBIAN_FRONTEND=noninteractive
+
 # Base packages
 RUN apt-get update && apt-get upgrade -y && \
     apt-get install -y --no-install-recommends\
@@ -16,8 +19,8 @@ RUN wget -O /bin/confd https://github.com/kelseyhightower/confd/releases/downloa
     chmod +x /bin/confd && \
     mkdir -p /etc/confd/{conf.d, templates}
 
-# add burp user
-RUN useradd burp
+# add user
+RUN useradd user
 
 # setup a Burp Suite directory
 RUN mkdir -p /burp
@@ -38,9 +41,9 @@ COPY certs /burp/certs
 COPY run.sh /burp/run.sh
 
 # chown burp directory
-RUN chown -R burp /burp
+RUN chown -R user /burp
 
 WORKDIR /burp
 EXPOSE 8025 8053 8080 8443 8465 8587 9090 9443
-USER burp
+USER user
 CMD [ "/burp/run.sh" ]

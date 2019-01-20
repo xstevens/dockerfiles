@@ -1,6 +1,9 @@
 FROM node:10.15-stretch-slim
 LABEL maintainer="Xavier Stevens <xavier.stevens@gmail.com>"
 
+# set DEBIAN_FRONTEND to convey no-TTY during build
+ARG DEBIAN_FRONTEND=noninteractive
+
 RUN apt-get update && apt-get upgrade -y && \
 	apt-get install -y --no-install-recommends \
 		ca-certificates \

@@ -1,4 +1,4 @@
-FROM debian:stretch-slim
+FROM debian:buster-slim
 
 RUN apt-get update && apt-get upgrade -y && \
 	apt-get install -y --no-install-recommends \
@@ -19,7 +19,7 @@ RUN useradd --create-home --home-dir $HOME user \
 
 ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8
-ENV IRSSI_VERSION 1.1.1
+ENV IRSSI_VERSION 1.1.2
 
 RUN buildDeps=' \
 		autoconf \
