@@ -21,10 +21,13 @@ ADD run.sh /app/run.sh
 RUN chmod +x /app/run.sh
 
 # add user
-RUN useradd user
+RUN useradd -s /sbin/nologin -m -u 10000 -U user
 
-RUN mkdir /src && chown user /src
+# setup /src volume mount
+RUN mkdir /src && chown user:user /src
 VOLUME /src
 WORKDIR /src
+
+USER user
 
 CMD ["/app/run.sh"]

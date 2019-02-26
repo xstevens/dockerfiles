@@ -20,8 +20,14 @@ RUN pip install --upgrade pip && pip install virtualenv pip-tools
 ADD run.sh /app/run.sh
 RUN chmod +x /app/run.sh
 
-RUN mkdir /src
+# add user
+RUN useradd -s /sbin/nologin -m -u 10000 -U user
+
+# setup /src volume mount
+RUN mkdir /src && chown user:user /src
 VOLUME /src
 WORKDIR /src
+
+USER user
 
 CMD ["/app/run.sh"]
