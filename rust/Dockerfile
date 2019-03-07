@@ -4,7 +4,7 @@ LABEL maintainer="Xavier Stevens <xavier.stevens@gmail.com>"
 # set DEBIAN_FRONTEND to convey no-TTY during build
 ARG DEBIAN_FRONTEND=noninteractive
 
-RUN echo "deb-src http://deb.debian.org/debian stretch main" >> /etc/apt/sources.list && \
+RUN echo "deb-src http://deb.debian.org/debian buster main" >> /etc/apt/sources.list && \
     apt-get update && apt-get install -y --no-install-recommends \
         build-essential \
         ca-certificates \
