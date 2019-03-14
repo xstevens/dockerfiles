@@ -17,9 +17,6 @@ ENV LC_ALL C.UTF-8
 # add pip-tools
 RUN pip install --upgrade pip && pip install virtualenv pip-tools
 
-ADD run.sh /app/run.sh
-RUN chmod +x /app/run.sh
-
 # add user
 RUN useradd -s /sbin/nologin -m -u 10000 -U user
 
@@ -30,4 +27,8 @@ WORKDIR /src
 
 USER user
 
-CMD ["/app/run.sh"]
+# install block diagram modules / commands
+RUN pip install --user blockdiag seqdiag actdiag nwdiag
+ENV PATH="${PATH}:/home/user/.local/bin"
+
+CMD ["/bin/bash"]

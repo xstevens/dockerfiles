@@ -1,5 +1,5 @@
 FROM python:2.7-slim-stretch
-LABEL maintainer="Xavier Stevens <xavier.stevens@gmail.com>"
+LABEL maintainer="Xavier Stevens"
 
 # set DEBIAN_FRONTEND to convey no-TTY during build
 ARG DEBIAN_FRONTEND=noninteractive

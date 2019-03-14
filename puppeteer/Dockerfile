@@ -1,5 +1,5 @@
 FROM node:10.15-alpine
-LABEL maintainer="Xavier Stevens <xavier.stevens@gmail.com>"
+LABEL maintainer="Xavier Stevens"
 
 # Installs latest Chromium (68) package.
 RUN apk update && apk upgrade && \

@@ -3,7 +3,7 @@
 # addition this image does not run as root and uses more recent version of 
 # Alpine Linux and Go.
 FROM golang:1.11-alpine3.8 AS build
-LABEL maintainer="Xavier Stevens <xavier.stevens@gmail.com>"
+LABEL maintainer="Xavier Stevens"
 
 RUN apk add --no-cache --upgrade git openssh-client ca-certificates
 RUN go get -u github.com/golang/dep/cmd/dep

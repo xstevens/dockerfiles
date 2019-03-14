@@ -1,5 +1,5 @@
 FROM debian:stretch-slim
-LABEL maintainer="Xavier Stevens <xavier.stevens@gmail.com>"
+LABEL maintainer="Xavier Stevens"
 
 ENV SECURITY_MONKEY_VERSION=v0.9.2 \
     SECURITY_MONKEY_SETTINGS=/usr/local/src/security_monkey/env-config/config-docker.py
