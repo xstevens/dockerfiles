@@ -1,9 +1,9 @@
 # recon-ng
-Source: https://github.com/xstevens/recon-ng
+Source: https://github.com/lanmaster53/recon-ng
 
 ## Build
 ```
-docker build -t $USER/recon-ng .
+$ docker build -t $USER/recon-ng .
 ```
 
 ## Run
@@ -11,7 +11,7 @@ You can run the container with the default command (recon-ng) or override the co
 bash shell if you prefer.
 
 ```
-$ docker run -it -v $HOME/.recon-ng:/home/recon/.recon-ng $USER/recon-ng
+$ docker run -it -v $HOME/.recon-ng:/home/user/.recon-ng $USER/recon-ng
 ```
 
 Once inside the container, then run:
@@ -27,18 +27,19 @@ _/    _/  _/_/_/_/    _/_/_/    _/_/_/    _/      _/            _/      _/    _/
 
                                           /\
                                          / \\ /\
-        Sponsored by...           /\  /\/  \\V  \/\
+    Sponsored by...               /\  /\/  \\V  \/\
                                  / \\/ // \\\\\ \\ \/\
                                 // // BLACK HILLS \/ \\
                                www.blackhillsinfosec.com
 
-                      [recon-ng v4.9.2, Tim Tomes (@LaNMaSteR53)]
+                  ____   ____   ____   ____ _____ _  ____   ____  ____
+                 |____] | ___/ |____| |       |   | |____  |____ |
+                 |      |   \_ |    | |____   |   |  ____| |____ |____
+                                   www.practisec.com
 
-[79] Recon modules
-[8]  Reporting modules
-[2]  Import modules
-[2]  Exploitation modules
-[2]  Discovery modules
+                      [recon-ng v5.0.0, Tim Tomes (@lanmaster53)]
+
+[17] Recon modules
 
 [recon-ng][default] >
 ```

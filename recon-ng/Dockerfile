@@ -1,4 +1,4 @@
-FROM python:2.7-slim-stretch
+FROM python:3-slim-stretch
 LABEL maintainer="Xavier Stevens"
 
 # set DEBIAN_FRONTEND to convey no-TTY during build
@@ -16,16 +16,14 @@ ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8
 
 # create recon user
-RUN useradd user
-
-WORKDIR /home/user
+RUN useradd -s /sbin/nologin -m -u 10000 -U user
 
 # install recon-ng
-RUN git clone https://github.com/xstevens/recon-ng.git /recon-ng
-RUN cd /recon-ng && pip install -r requirements.txt
-
-# install theHarvester
-RUN git clone https://github.com/laramies/theHarvester.git /harvester
+ARG RECON_NG_VERSION=v5.0.0
+RUN git clone https://github.com/lanmaster53/recon-ng.git /recon-ng && \
+    cd /recon-ng && \
+    git checkout ${RECON_NG_VERSION} -b pinned && \
+    pip install -r REQUIREMENTS
 
 # recon-ng data volume
 RUN mkdir /home/user/.recon-ng && \
@@ -33,7 +31,8 @@ RUN mkdir /home/user/.recon-ng && \
 VOLUME /home/user/.recon-ng/
 
 # switch to recon user
+WORKDIR /recon-ng
 USER user
 
 # just a suggestion, use /bin/bash if you want to drop into bash or tmux
-CMD ["/recon-ng/recon-ng"]
+CMD ["/recon-ng/recon-ng", "--no-analytics"]
