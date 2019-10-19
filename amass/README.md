@@ -55,7 +55,7 @@ https://github.com/OWASP/Amass/blob/master/examples/config.ini
 This is a pretty standard example of how to run amass in a container:
 
 ```
-docker run -v $PWD:/output -it $USER/amass enum --passive -d example.com -o /output/amass-output.txt -do /output/amass-data.json
+docker run -v $PWD:/output -it $USER/amass enum --passive -d example.com -o /output/amass-output.txt -json /output/amass-output.json
 ```
 
 For more details check out the source repository link above.
