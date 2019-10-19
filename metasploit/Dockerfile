@@ -8,21 +8,26 @@ ARG DEBIAN_FRONTEND=noninteractive
 RUN mkdir -p /usr/share/man/man1 && mkdir -p /usr/share/man/man7 && \
     apt-get update && \
     apt-get install -y --no-install-recommends \
-        apt-utils \
+        apt-transport-https \
         ca-certificates \
         curl \
         git \
         gnupg \
         nmap \
         postgresql \
-        tmux \
+        tmux
+
+# Install metasploit-framework
+# Functionally equivalent to the steps in:
+# https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb
+ADD metasploit-rapid7.asc /etc/apt/trusted.gpg.d/
+RUN echo -n "deb http://downloads.metasploit.com/data/releases/metasploit-framework/apt buster main" > /etc/apt/sources.list.d/metasploit-framework.list && \
+    apt-get update && \
+    apt-get install -y --no-install-recommends \
+        metasploit-framework \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /tmp
-
-# Install Metasploit with Rapid7 install script
-RUN curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb > msfinstall && \
-    chmod 755 msfinstall && ./msfinstall
 
 # Install exploit-database
 RUN git clone https://github.com/offensive-security/exploit-database.git /opt/exploit-database && \
@@ -37,7 +42,7 @@ COPY findsploit.sh /usr/bin/findsploit
 RUN chmod 755 /usr/bin/findsploit
 
 # create msf user
-RUN useradd msf
+RUN useradd -s /sbin/nologin -M -u 10000 -U msf
 
 # switch to msf user
 USER msf
