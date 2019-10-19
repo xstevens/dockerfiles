@@ -10,7 +10,6 @@ docker build -t $USER/amass .
 ```
 $ docker run -it -v $PWD:/output $USER/amass -h
 
-
         .+++:.            :                             .+++.
       +W@@@@@@8        &+W@#               o8W8:      +W@@@@@@#.   oW@@@W#+
      &@#+   .o@##.    .@@@o@W.o@@o       :@@#&W8o    .@#:  .:oW+  .@#+++&#&
@@ -24,10 +23,9 @@ $ docker run -it -v $PWD:/output $USER/amass -h
       :W@@WWWW@@8       +              :&W@@@@&    &W  .o#@@W&.   :W@WWW@@&
         +o&&&&+.                                                    +oooo.
 
-
-                                                                     v3.0.27
+                                                                     v3.1.10
                                            OWASP Amass Project - @owaspamass
-                                In-depth DNS Enumeration and Network Mapping
+                         In-depth Attack Surface Mapping and Asset Discovery
 
 
 Usage: amass intel|enum|viz|track|db [options]
