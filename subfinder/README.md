@@ -8,7 +8,7 @@ docker build -t $USER/subfinder .
 
 ## Run
 ```
-$ docker run -it -v $HOME/.config/subfinder:/home/subfinder/.config/subfinder $USER/subfinder -h
+$ docker run -it -v $HOME/.config/subfinder:/home/user/.config/subfinder $USER/subfinder -h
 Usage of /usr/bin/subfinder:
   -b	Use bruteforcing to find subdomains
   -d string
@@ -57,7 +57,7 @@ Usage of /usr/bin/subfinder:
 This is a pretty standard example of how to run subfinder in a container:
 
 ```
-docker run --rm -it -v $HOME/.config/subfinder:/home/subfinder/.config/subfinder $USER/subfinder -d example.com
+docker run --rm -it -v $HOME/.config/subfinder:/home/user/.config/subfinder $USER/subfinder -d example.com
 ```
 
 For more details check out the source repository link above.

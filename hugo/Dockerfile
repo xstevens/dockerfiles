@@ -1,4 +1,4 @@
-FROM node:10.15-stretch-slim
+FROM node:10.16-buster-slim
 LABEL maintainer="Xavier Stevens"
 
 # set DEBIAN_FRONTEND to convey no-TTY during build
@@ -13,7 +13,7 @@ RUN apt-get update && apt-get upgrade -y && \
 
 ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8
-ENV HUGO_VERSION 0.53
+ENV HUGO_VERSION 0.55.6
 
 WORKDIR /opt/hugo    
 RUN set -x && \

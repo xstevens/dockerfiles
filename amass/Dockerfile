@@ -5,7 +5,7 @@ RUN apk add --no-cache --upgrade git ca-certificates
 
 WORKDIR /go/src/github.com/OWASP/Amass
 
-ARG AMASS_VERSION=v3.1.9
+ARG AMASS_VERSION=v3.1.10
 RUN git clone https://github.com/OWASP/amass.git . && \
     git checkout ${AMASS_VERSION} -b pinned && \
     GO111MODULE=on go get -u github.com/OWASP/Amass/...

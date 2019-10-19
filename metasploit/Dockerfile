@@ -29,8 +29,8 @@ RUN git clone https://github.com/offensive-security/exploit-database.git /opt/ex
     ln -sf /opt/exploit-database/searchsploit /usr/local/bin/searchsploit
 
 # Install ripgrep
-RUN curl -LO https://github.com/BurntSushi/ripgrep/releases/download/0.10.0/ripgrep_0.10.0_amd64.deb && \
-    dpkg -i ripgrep_0.10.0_amd64.deb
+RUN curl -LO https://github.com/BurntSushi/ripgrep/releases/download/11.0.2/ripgrep_11.0.2_amd64.deb && \
+    dpkg -i ripgrep_11.0.2_amd64.deb
 
 # Add findsploit script
 COPY findsploit.sh /usr/bin/findsploit
