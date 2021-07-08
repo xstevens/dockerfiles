@@ -19,7 +19,7 @@ RUN useradd --create-home --home-dir $HOME user \
 
 ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8
-ENV IRSSI_VERSION 1.1.2
+ENV IRSSI_VERSION 1.2.3
 
 RUN buildDeps=' \
 		autoconf \
@@ -43,7 +43,7 @@ RUN buildDeps=' \
 	&& wget "https://github.com/irssi/irssi/releases/download/${IRSSI_VERSION}/irssi-${IRSSI_VERSION}.tar.xz.asc" -O /tmp/irssi.tar.xz.asc \
 	&& export GNUPGHOME="$(mktemp -d)" \
 # gpg: key DDBEF0E1: public key "The Irssi project <staff@irssi.org>" imported
-	&& gpg --keyserver ha.pool.sks-keyservers.net --recv-keys 7EE65E3082A5FB06AC7C368D00CCB587DDBEF0E1 \
+	&& gpg --keyserver pgp.mit.edu --recv-keys '7EE6 5E30 82A5 FB06 AC7C 368D 00CC B587 DDBE F0E1' \
 	&& gpg --batch --verify /tmp/irssi.tar.xz.asc /tmp/irssi.tar.xz \
 	&& rm -rf "$GNUPGHOME" /tmp/irssi.tar.xz.asc \
 	&& mkdir -p /usr/src/irssi \

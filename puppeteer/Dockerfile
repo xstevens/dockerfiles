@@ -1,4 +1,4 @@
-FROM node:10.15-alpine
+FROM node:lts-alpine
 LABEL maintainer="Xavier Stevens"
 
 # Installs latest Chromium (68) package.
@@ -14,8 +14,8 @@ RUN apk update && apk upgrade && \
 # Tell Puppeteer to skip installing Chrome. We'll be using the installed package.
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
 
-# Puppeteer v1.4.0 works with Chromium 68.
-RUN yarn add puppeteer@1.4.0
+# Add puppeteer
+RUN yarn add puppeteer@v9.1.1
 
 RUN adduser -s /bin/sh -D puppeteer && \
     mkdir -p /home/puppeteer/Downloads && \
