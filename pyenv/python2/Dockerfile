@@ -1,4 +1,4 @@
-FROM python:2.7-slim-stretch
+FROM python:2.7-slim-buster
 LABEL maintainer="Xavier Stevens"
 
 # set DEBIAN_FRONTEND to convey no-TTY during build
