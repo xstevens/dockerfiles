@@ -10,5 +10,5 @@ docker build -t $USER/dnschef .
 You can run the container with the default command or override the command and specify your own parameters
 
 ```
-$ docker run -it $USER/dnschef --fakedomains=*.foo.com --fakeip=127.0.0.1
+$ docker run -it -p 5353:5353/udp $USER/dnschef --fakedomains=*.example.com --fakeip=127.0.0.1
 ```

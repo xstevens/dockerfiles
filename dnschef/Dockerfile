@@ -1,4 +1,4 @@
-FROM python:2.7-slim-stretch
+FROM python:3.9-slim-buster
 LABEL maintainer="Xavier Stevens"
 
 # set DEBIAN_FRONTEND to convey no-TTY during build
@@ -23,8 +23,9 @@ RUN git clone https://github.com/iphelix/dnschef.git /dnschef \
     && chown -R user /dnschef
 
 WORKDIR /dnschef
-EXPOSE 5353
+EXPOSE 5353/tcp
+EXPOSE 5353/udp
 USER user
 
 ENTRYPOINT ["/dnschef/dnschef.py", "-p", "5353"]
-CMD ["--fakedomains=*.evilcorp.com", "--fakeip=127.0.0.1"]
+CMD ["--fakedomains=*.example.com", "--fakeip=127.0.0.1"]

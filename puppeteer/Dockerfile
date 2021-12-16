@@ -1,7 +1,7 @@
 FROM node:lts-alpine
 LABEL maintainer="Xavier Stevens"
 
-# Installs latest Chromium (68) package.
+# Installs latest Chromium package.
 RUN apk update && apk upgrade && \
     apk add --no-cache chromium && \
     # echo @edge http://nl.alpinelinux.org/alpine/edge/community >> /etc/apk/repositories && \
@@ -15,7 +15,7 @@ RUN apk update && apk upgrade && \
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
 
 # Add puppeteer
-RUN yarn add puppeteer@v9.1.1
+RUN yarn add puppeteer@v12.0.1
 
 RUN adduser -s /bin/sh -D puppeteer && \
     mkdir -p /home/puppeteer/Downloads && \
