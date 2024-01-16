@@ -1,4 +1,4 @@
-FROM node:10.16-buster-slim
+FROM node:18-slim
 LABEL maintainer="Xavier Stevens"
 
 # set DEBIAN_FRONTEND to convey no-TTY during build
@@ -13,15 +13,15 @@ RUN apt-get update && apt-get upgrade -y && \
 
 ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8
-ENV HUGO_VERSION 0.55.6
+ENV HUGO_VERSION 0.99.1
 
-WORKDIR /opt/hugo    
+WORKDIR /opt/hugo
 RUN set -x && \
-	curl -LO "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_Linux-64bit.tar.gz" && \
-    curl -LO "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_checksums.txt" && \
-    grep "hugo_extended_${HUGO_VERSION}_Linux-64bit.tar.gz" "hugo_extended_${HUGO_VERSION}_checksums.txt" | sha256sum --status -c && \
-    tar xvzf "hugo_extended_${HUGO_VERSION}_Linux-64bit.tar.gz" && \
-	rm "hugo_extended_${HUGO_VERSION}_checksums.txt" "hugo_extended_${HUGO_VERSION}_Linux-64bit.tar.gz"
+	curl -LO "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_Linux-64bit.tar.gz" && \
+    curl -LO "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_checksums.txt" && \
+    grep "hugo_${HUGO_VERSION}_Linux-64bit.tar.gz" "hugo_${HUGO_VERSION}_checksums.txt" | sha256sum --status -c && \
+    tar xvzf "hugo_${HUGO_VERSION}_Linux-64bit.tar.gz" && \
+	rm "hugo_${HUGO_VERSION}_checksums.txt" "hugo_${HUGO_VERSION}_Linux-64bit.tar.gz"
 ENV PATH "/opt/hugo:${PATH}"
 
 RUN npm install -g postcss-cli autoprefixer
