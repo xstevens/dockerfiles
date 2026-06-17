@@ -1,25 +1,18 @@
-FROM golang:1.13-alpine AS build
+FROM cgr.dev/chainguard/go:latest AS build
 LABEL maintainer="Xavier Stevens"
 
-RUN apk add --no-cache --upgrade git ca-certificates
+ARG AMASS_VERSION=v5.1.1
 
-WORKDIR /go/src/github.com/OWASP/Amass
-
-ARG AMASS_VERSION=e7066984afb04a0687fe3df946371cb57c68a455
-RUN git clone https://github.com/xstevens/amass.git . && \
-    git checkout ${AMASS_VERSION} -b pinned && \
-    GO111MODULE=on go install -v ./...
+RUN CGO_ENABLED=0 go install -v github.com/owasp-amass/amass/v5/...@${AMASS_VERSION} && \
+    cp /root/go/bin/amass /usr/bin/
 
 # Final Container
-FROM alpine:3.10
+FROM cgr.dev/chainguard/static
 
-COPY --from=build /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
-COPY --from=build /go/bin/amass* /usr/bin/
-COPY --from=build /go/src/github.com/OWASP/Amass/examples/wordlists /wordlists
+# COPY --from=build /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
+# COPY --from=build /go/src/github.com/OWASP/Amass/examples/wordlists /wordlists
+COPY --from=build /usr/bin/amass /usr/bin/amass
 
 VOLUME /output
-
-RUN adduser -s /bin/sh -D amass
-USER amass
 
 ENTRYPOINT ["/usr/bin/amass"]
